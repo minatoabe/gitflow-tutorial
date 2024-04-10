@@ -39,3 +39,5 @@ Gitflowの開発フローは以下の通りです。
 10. master(main) をリリースする
 以下、ループ。
 
+# 参考サイト
+- [【図解】git-flow、GitHub Flowを開発現場で使い始めるためにこれだけは覚えておこう](https://atmarkit.itmedia.co.jp/ait/articles/1708/01/news015.html)
