@@ -1,6 +1,6 @@
 NAME = bsq
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -I$(INCDIR) -MMD -MP
+CXXFLAGS = -Wall -Wextra -Werror -std=c++11 -I$(INCDIR) -MMD -MP
 
 
 INCDIR = ./inc

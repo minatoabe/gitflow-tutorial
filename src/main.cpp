@@ -1,71 +1,106 @@
 #include "../inc/bsq.hpp"
 
-static char **make_map(int fd)
+static Map putMaxSquare(Map &map)
 {
-    char *content;
-    char **map;
+    Map result;
+    std::vector<std::vector<int> > intMap;
+    int max = 0;
+    int maxX = 0;
+    int maxY = 0;
 
-    content = ft_read(fd);
-    if (check_end_with_newline(content) == false)
-        return (NULL);
-    map = ft_split(content, "\n");
-    ft_free(content);
-    return (map);
-}
-
-static int read_map_and_put_max_square(int fd)
-{
-    char **map;
-    t_info *info;
-
-    map = make_map(fd);
-    if (map == NULL)
-        return (FAIL);
-    info = init_mapinfo(map);
-    if (info == NULL)
-        return (FAIL);
-    if (check_valid_map(map, info) == false)
-        return (FAIL);
-    ft_make_map(map, info);
-    free_map(&map);
-    ft_free(info);
-    return (SUCCESS);
-}
-
-static int read_maps_and_put_max_square(int argc, char *argv[])
-{
-    int fd;
-
-    for (int i = 1; i < argc; i++)
+    for (std::string line : map)
     {
-        fd = open(argv[i], O_RDONLY);
-        if (fd == -1)
-            return (FAIL);
-        if (!read_map_and_put_max_square(fd))
+        std::vector<int> intLine;
+        for (char c : line)
         {
-            close(fd);
-            return (FAIL);
+            if (c == '.')
+            {
+                intLine.push_back(1);
+            }
+            else
+            {
+                intLine.push_back(0);
+            }
         }
-        close(fd);
-        if (i + 1 != argc)
-            ft_putstr("\n");
+        intMap.push_back(intLine);
     }
-    return (SUCCESS);
+
+    for (size_t i = 1; i < intMap.size(); i++)
+    {
+        for (size_t j = 1; j < intMap[i].size(); j++)
+        {
+            if (intMap[i][j] == 1)
+            {
+                int min = std::min(intMap[i - 1][j], std::min(intMap[i][j - 1], intMap[i - 1][j - 1]));
+                intMap[i][j] = min + 1;
+                if (intMap[i][j] > max)
+                {
+                    max = intMap[i][j];
+                    maxX = i;
+                    maxY = j;
+                }
+            }
+        }
+    }
+
+    for (int i = maxX - max; i < maxX; i++)
+    {
+        std::string line = map[i];
+        for (int j = maxY - max; j < maxY; j++)
+        {
+            line[j] = 'x';
+        }
+        result.push_back(line);
+    }
+
+    return result;
+}
+
+static Map readMap(char *argv[])
+{
+    std::ifstream file;
+    Map map;
+
+    file.open(argv[1]);
+    if (!file.is_open())
+    {
+        file.close();
+        throw std::runtime_error("File not found");
+    }
+    else
+    {
+        std::string line;
+
+        while (std::getline(file, line))
+        {
+            map.map.push_back(line);
+        }
+        file.close();
+        return map;
+    }
 }
 
 int main(int argc, char *argv[])
 {
-    if (argc < 2)
+    if (argc != 2)
     {
-        /* 標準入力から処理する */
-        if (!read_map_and_put_max_square(STDIN_FILENO))
-            ft_puterror(FT_ERR_MAP);
+        std::cerr << "Usage: " << argv[0] << " [map_file]" << std::endl;
     }
     else
     {
-        /* マップファイルから1つ以上処理する */
-        if (!read_maps_and_put_max_square(argc, argv))
-            ft_puterror(FT_ERR_MAP);
+        try
+        {
+            Map map = readMap(argv);
+            Map result = putMaxSquare(map);
+            for (std::string line : result)
+            {
+                std::cout << line << std::endl;
+            }
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
     }
-    return (0);
+    return 0;
 }
