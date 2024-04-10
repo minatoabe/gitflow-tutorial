@@ -4,17 +4,21 @@ Gitflowの使い方を学ぶためのリポジトリです。
 
 ## Gitflowとは
 Gitflowは、[Vincent Driessen](https://github.com/nvie)氏によって提唱されたGitのブランチモデル。
+
 Gitflowは、以下の5つのブランチを使って開発を進めます。
-master(main): リリースされたコードを管理するブランチ
-develop: 開発中のコードを管理するブランチ
-feature: 機能の追加や修正を行うブランチ(feature/XXX)
-release: リリース前の最終調整を行うブランチ(release/vX.X.X)
-hotfix: リリース後の緊急修正を行うブランチ(hotfix/XXX)
+
+- master(main): リリースされたコードを管理するブランチ
+- develop: 開発中のコードを管理するブランチ
+- feature: 機能の追加や修正を行うブランチ(feature/XXX)
+- release: リリース前の最終調整を行うブランチ(release/vX.X.X)
+- hotfix: リリース後の緊急修正を行うブランチ(hotfix/XXX)
 <img src="/asset/img/gitflow.jpeg" width="400px">
 
 ### Github Flowとの違い
 Github Flowは、masterブランチだけを使って開発を進めるブランチモデルです。
+
 Github Flowは、masterブランチに直接コードをマージするため、masterブランチが常にデプロイ可能な状態を保つ必要があります。
+
 一方、Gitflowは、masterブランチ以外にも開発用のブランチを使うため、masterブランチは常に安定した状態を保つことができます。
 
 <img src="/asset/img/githubflow.jpeg" width="400px">
