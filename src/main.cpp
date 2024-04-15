@@ -11,8 +11,11 @@ int main(int argc, char *argv[])
         try
         {
             MapInfo mapInfo = readMap(argv);
-            std::cout << mapInfo << std::endl;
-            MapInfo result = putMaxSquare(mapInfo);
+            std::vector<std::string> result = putMaxSquare(mapInfo);
+            for (const std::string &line : result)
+            {
+                std::cout << line << std::endl;
+            }
         }
         catch (const std::exception &e)
         {

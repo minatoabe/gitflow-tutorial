@@ -24,4 +24,4 @@ inline std::ostream &operator<<(std::ostream &os, const MapInfo &mapInfo)
 }
 
 MapInfo readMap(char *argv[]);
-MapInfo putMaxSquare(MapInfo map);
+std::vector<std::string> putMaxSquare(MapInfo mapInfo);
