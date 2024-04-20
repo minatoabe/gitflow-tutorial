@@ -73,6 +73,7 @@ std::vector<std::string> putMaxSquare(MapInfo mapInfo)
     std::vector<std::vector<int>> dp(mapInfo.map.size(), std::vector<int>(mapInfo.map[0].size(), 0));
     size_t max = 0;
     size_t max_i = 0;
+    printf("bbb");
     size_t max_j = 0;
     for (size_t i = 0; i < mapInfo.map.size(); i++)
     {
@@ -95,6 +96,7 @@ std::vector<std::string> putMaxSquare(MapInfo mapInfo)
             if (static_cast<size_t>(dp[i][j]) > max)
             {
                 max = dp[i][j];
+                printf("bbb");
                 max_i = i;
                 max_j = j;
             }
