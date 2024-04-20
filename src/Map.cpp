@@ -80,6 +80,7 @@ std::vector<std::string> putMaxSquare(MapInfo mapInfo)
         {
             if (mapInfo.map[i][j] == mapInfo.obstacle)
             {
+                printf("aaaa");
                 dp[i][j] = 0;
             }
             else if (i == 0 || j == 0)
@@ -88,6 +89,7 @@ std::vector<std::string> putMaxSquare(MapInfo mapInfo)
             }
             else
             {
+                printf("aaaa");
                 dp[i][j] = std::min(dp[i - 1][j - 1], std::min(dp[i - 1][j], dp[i][j - 1])) + 1;
             }
             if (static_cast<size_t>(dp[i][j]) > max)
@@ -114,5 +116,6 @@ std::vector<std::string> putMaxSquare(MapInfo mapInfo)
         }
         result.push_back(line);
     }
+    printf("aaaa");
     return result;
 }
