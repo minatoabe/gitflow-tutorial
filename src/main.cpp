@@ -22,5 +22,6 @@ int main(int argc, char *argv[])
             std::cerr << e.what() << std::endl;
         }
     }
+    printf("Hello, World!\n");
     return 0;
 }
