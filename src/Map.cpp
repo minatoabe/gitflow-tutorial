@@ -16,11 +16,11 @@ static MapInfo restoreMap(std::ifstream &file)
     }
     catch (const std::exception &e)
     {
-        throw std::runtime_error(" INVALID");
+        throw std::runtime_error("Invalid map");
     }
     if (mapInfo.len <= 0 || mapInfo.full == mapInfo.obstacle || mapInfo.obstacle == mapInfo.empty || mapInfo.empty == mapInfo.full)
     {
-        throw std::runtime_error(" INVALID");
+        throw std::runtime_error("Invalid map");
     }
 
     int rowCount = 0;
@@ -29,13 +29,13 @@ static MapInfo restoreMap(std::ifstream &file)
         mapInfo.map.push_back(line);
         if (line.size() != static_cast<size_t>(mapInfo.len))
         {
-            throw std::runtime_error(" INVALID");
+            throw std::runtime_error("Invalid map");
         }
         rowCount++;
     }
     if (rowCount != mapInfo.len)
     {
-        throw std::runtime_error(" INVALID");
+        throw std::runtime_error("Invalid map");
     }
     return mapInfo;
 }
@@ -61,7 +61,7 @@ MapInfo readMap(char *argv[])
         catch (const std::exception &e)
         {
             file.close();
-            throw std::runtime_error(" INVALID");
+            throw std::runtime_error("Invalid map");
         }
     }
 }
